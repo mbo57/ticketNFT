@@ -1,0 +1,11 @@
+version: '3.3'
+services:
+  nodejs:
+    build:
+      context: ./nodejs/
+      dockerfile: Dockerfile
+    volumes:
+      - ./ticketnft:/usr/src/app/ticketnft 
+    command: sh -c "cd ticketnft && ls -a && yarn dev"
+    ports:
+      - "3000:3000"
