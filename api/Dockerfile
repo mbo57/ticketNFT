@@ -14,9 +14,4 @@ WORKDIR /go/src/app
 RUN go install github.com/cosmtrek/air@latest
 
 # airを実行
-CMD ["air"]
-
-
-# CMD ["go", "run", "test.go"]
-
-CMD ["go", "run", "main.go"]
+CMD ["air", "-c", ".air.toml"]

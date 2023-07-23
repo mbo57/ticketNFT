@@ -2,26 +2,33 @@ package employee
 
 import (
 	"database/sql"
-    "app/typefile"
+    // "app/typefile"
 	// "encoding/json"
 )
 
-func ReadAll(db *sql.DB) typefile.Employees{
-	var employees typefile.Employees
+type Employee struct{
+    Id   int    `json:"id"`
+    Name string `json:"name"`
+}
+
+type Employees []Employee
+
+func ReadAll(db *sql.DB) Employees{
+	var employees Employees
 	rows, err := db.Query("select * from employee;")
 	if err != nil {
 		panic(err)
 	}
-    // fmt.Println(rows)
+
 	for rows.Next() {
-        employee := typefile.Employee{}
+        employee := Employee{}
         err = rows.Scan(&employee.Id, &employee.Name)
 		if err != nil {
 			panic(err)
 		}
 		employees = append(employees, employee)
 	}
-    // jsonemployees, _ := json.Marshal(employees)
+
 	rows.Close()
     return employees
 }
