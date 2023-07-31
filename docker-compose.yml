@@ -10,14 +10,15 @@ services:
     volumes:
       - ./ticketnft:/usr/src/app
       - node-modules:/usr/src/app/node_modules
-    command: sh -c "yarn dev"
+    command: sh -c "yarn && yarn dev"
     ports:
       - "3000:3000"
     networks:
       - frontend
+    tty: true
 
   api:
-    tty: true
+    # tty: true
     depends_on:
       - db
     build:
