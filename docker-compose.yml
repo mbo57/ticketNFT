@@ -1,4 +1,5 @@
 version: '3.3'
+
 services:
   nodejs:
     build:
@@ -7,8 +8,8 @@ services:
     depends_on:
       - api
     volumes:
-      - ./ticketnft:/usr/src/app/ticketnft 
-    command: sh -c "cd ticketnft && ls -a && yarn dev"
+      - ./ticketnft:/usr/src/app
+    command: sh -c "yarn dev"
     ports:
       - "3000:3000"
     networks:
