@@ -1,4 +1,4 @@
-const url = "http://api:8000/";
+const endpoint = "http://api:8000/";
 
 type staff = {
     id: int
@@ -19,6 +19,8 @@ export default async function Home() {
     // })();
     // const staffs = staffsget().then((tmp) => console.log(tmp))
     // const staffs = await getStaffs()
+    const url = endpoint + "staff/show"
+
     const staffs = await fetch(url).then((r) => r.json())
     console.log(staffs)
 
@@ -35,6 +37,12 @@ export default async function Home() {
                         <th>
                             staff_name
                         </th>
+                        <th>
+                            staff_email
+                        </th>
+                        <th>
+                            staff_password
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,6 +50,8 @@ export default async function Home() {
                     <tr>
                         <td>{staff.id}</td>
                         <td>{staff.name}</td>
+                        <td>{staff.email}</td>
+                        <td>{staff.password}</td>
                     </tr>
                 )}
                 {/*
