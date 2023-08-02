@@ -1,3 +1,5 @@
+
+import { Staff } from "./types";
 import type { NextAuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
@@ -5,12 +7,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 
 const endpoint = "http://api:8000/";
 
-type staff = {
-    id: int
-    email: string
-    password: string
-    name: string
-}
 
 
 export const options: NextAuthOptions = {
