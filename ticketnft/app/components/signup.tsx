@@ -21,7 +21,7 @@ export const SignupForm = () => {
     // setFormValues({ name: "", email: "", password: "" });
 
     try {
-      url = endpoint + "create/staff?email=" + email + "&password=" + password + "&name=" + name
+      const url = endpoint + "staff/create?email=" + formValues.email + "&password=" + formValues.password + "&name=" + formValues.name
       console.log(url)
       const res = await fetch(url)
 
