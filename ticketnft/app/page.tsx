@@ -15,9 +15,6 @@ async function getStaffs() {
     return res.json()
 }
 
-
-
-
 export default async function Home() {
 
     const staffs = await getStaffs()
