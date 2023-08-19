@@ -40,8 +40,8 @@ export const HeaderForStaff = () => {
                             color= "foreground"
                             className= {
                                 index === 2
-                                    ? "foreground mj-header-underline"
-                                    : "foreground"
+                                    ? "foreground mj-header-underline text-base font-bold"
+                                    : "foreground text-base font-bold"
                             }
                             href="#"
                             size="lg"
@@ -62,8 +62,8 @@ export const HeaderForStaff = () => {
                             color="foreground"
                             className={
                                 index === 2
-                                    ? "w-full text-mj_base"
-                                    : "w-full"
+                                    ? "w-full text-mj_base text-base font-bold"
+                                    : "w-full text-base font-bold"
                             }
                             href="#"
                             size="lg"
