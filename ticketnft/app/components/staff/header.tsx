@@ -19,13 +19,17 @@ import Logo from "../../../public/LogoForStaff.png";
 export const HeaderForStaff = () => {
     const [isMenuOpen, setIsMenuOpen] = React.useState<boolean>(false);
 
-    const menuItems: string[] = ["menu1", "menu2", "menu3"];
+    const menuItems: string[] = ["イベント管理", "チケット管理", "主催者管理"];
 
     return (
         <Navbar>
             <NavbarContent>
                 <NavbarBrand>
-                    <Image src={Logo} alt="mujiqulo for staff" className="h-[50px] w-auto" />
+                    <Image
+                        src={Logo}
+                        alt="mujiqulo for staff"
+                        className="h-[50px] w-auto"
+                    />
                 </NavbarBrand>
             </NavbarContent>
 
@@ -33,14 +37,12 @@ export const HeaderForStaff = () => {
                 {menuItems.map((item, index) => (
                     <NavbarItem key={`${item}-${index}`}>
                         <Link
-                            color={
+                            color= "foreground"
+                            className= {
                                 index === 2
-                                    ? "primary"
-                                    : index === menuItems.length - 1
-                                    ? "danger"
+                                    ? "foreground mj-header-underline"
                                     : "foreground"
                             }
-                            className="w-full"
                             href="#"
                             size="lg"
                         >
@@ -48,21 +50,21 @@ export const HeaderForStaff = () => {
                         </Link>
                     </NavbarItem>
                 ))}
-                <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
+                <NavbarMenuToggle
+                    aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+                />
             </NavbarContent>
 
             <NavbarMenu>
                 {menuItems.map((item, index) => (
                     <NavbarMenuItem key={`${item}-${index}`}>
                         <Link
-                            color={
+                            color="foreground"
+                            className={
                                 index === 2
-                                    ? "primary"
-                                    : index === menuItems.length - 1
-                                    ? "danger"
-                                    : "foreground"
+                                    ? "w-full text-mj_base"
+                                    : "w-full"
                             }
-                            className="w-full"
                             href="#"
                             size="lg"
                         >

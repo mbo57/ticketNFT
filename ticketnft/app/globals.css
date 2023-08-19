@@ -29,3 +29,14 @@ body {
 .max-w-\[1024px\] {
   max-width: 1280px;
 }
+
+.mj-header-underline::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  bottom: -18px;
+  background-color: #078080;
+  border-radius: 1.5px;
+}
