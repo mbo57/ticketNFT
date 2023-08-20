@@ -18,16 +18,19 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
 }
 
 .max-w-\[1024px\] {
   max-width: 1280px;
+}
+
+.mj-container {
+  max-width: 1280px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 .mj-header-underline::after {
