@@ -16,6 +16,15 @@ import {
     TableCell,
     Link,
     Avatar,
+    Modal,
+    ModalContent,
+    ModalHeader,
+    ModalBody,
+    ModalFooter,
+    useDisclosure,
+    Checkbox,
+    Input,
+    Button,
 } from "@nextui-org/react";
 
 import Add from "../../public/icon/add.png";
@@ -24,9 +33,12 @@ import Edit from "../../public/icon/edit.png";
 import Trash from "../../public/icon/trash.png";
 
 export default async function StaffPageTop() {
+
     return (
         <NextUIProvider>
             <HeaderForStaff />
+
+            <ModalComponent />
 
             <main className="mj-container">
                 <section>
@@ -256,8 +268,6 @@ export default async function StaffPageTop() {
                     </Table>
                 </section>
 
-
-
                 <section>
                     <h1 className="text-2xl mt-8 mb-4 font-bold">
                         イベントカテゴリ一覧
@@ -433,5 +443,38 @@ export default async function StaffPageTop() {
 
             <Footer />
         </NextUIProvider>
+    );
+}
+
+function ModalComponent() {
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+    return (
+        <>
+            <Button onPress={onOpen}>Open Modal</Button>
+            <Modal
+                isOpen={isOpen}
+                onOpenChange={onOpenChange}
+                isDismissable={false}
+            >
+                <Modal
+                    isOpen={isOpen}
+                    onOpenChange={onOpenChange}
+                    placement="top-center"
+                >
+                    <ModalContent>
+                        {(onClose) => (
+                            <>
+                                <ModalHeader className="flex flex-col gap-1">
+                                    Log in
+                                </ModalHeader>
+                                <ModalBody>hoge</ModalBody>
+                                <ModalFooter>Sign in</ModalFooter>
+                            </>
+                        )}
+                    </ModalContent>
+                </Modal>
+            </Modal>
+        </>
     );
 }
