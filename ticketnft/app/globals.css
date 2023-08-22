@@ -43,3 +43,29 @@ body {
   background-color: #078080;
   border-radius: 1.5px;
 }
+
+.mj-select {
+  position: relative;
+  height: 56px;
+}
+
+.mj-select label {
+  position: absolute;
+  top: 6px;
+  left: 12px;
+  font-size: 0.75rem;
+  color: #525257;
+}
+
+.mj-select select {
+  height: 56px;
+  font-size: 14px;
+  width: 100%;
+  padding: 24px 10px 8px 10px;
+  border: 2px solid #E4E4E7;
+  border-radius: 10px;
+}
+
+.mj-select select:focus {
+  border: 2px solid #333;
+}
