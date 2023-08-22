@@ -1,5 +1,6 @@
 "use client";
 import * as React from "react";
+import { useState } from "react";
 
 import Image from "next/image";
 
@@ -24,7 +25,32 @@ import Vuesax from "../../public/icon/vuesax.png";
 import Edit from "../../public/icon/edit.png";
 import Trash from "../../public/icon/trash.png";
 
-export default async function StaffPageTop() {
+import {
+    Event,
+    Events,
+    SampleDataEvent,
+    SampleDataEvents,
+    EventCategory,
+    EventCategories,
+    SampleDataEventCategory,
+    Cast,
+    Casts,
+    SampleDataCast,
+} from "@/app/staff/type"
+
+export default function StaffPageTop() {
+    let [events, setevents] = useState<Events>({
+        name: "イベント",
+        data: [SampleDataEvent]
+    })
+
+    const [name, setName] = useState<string>("")
+    const [date, setDate] = useState<string>("")
+    const [place, setPlace] = useState<string>("")
+    const [cast, setCast] = useState<Cast>({id: 0, name: ""})
+
+    
+
     return (
         <NextUIProvider>
             <HeaderForStaff />
@@ -32,7 +58,7 @@ export default async function StaffPageTop() {
             <main className="mj-container">
                 <section>
                     <h1 className="text-2xl mt-8 mb-4 font-bold">
-                        イベント一覧
+                        {events.name}一覧
                         <NewModal />
                     </h1>
 
