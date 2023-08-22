@@ -4,6 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 
 import { HeaderForStaff } from "@/app/components/staff/header";
+import { DeleteModal, EditModal, NewModal } from "@/app/components/staff/modal";
 import { Footer } from "@/app/components/footer";
 
 import {
@@ -16,20 +17,6 @@ import {
     TableCell,
     Link,
     Avatar,
-    Modal,
-    ModalContent,
-    ModalHeader,
-    ModalBody,
-    ModalFooter,
-    useDisclosure,
-    Checkbox,
-    Input,
-    Button,
-    Textarea,
-    Dropdown,
-    DropdownTrigger,
-    DropdownMenu,
-    DropdownItem,
 } from "@nextui-org/react";
 
 import Add from "../../public/icon/add.png";
@@ -46,19 +33,7 @@ export default async function StaffPageTop() {
                 <section>
                     <h1 className="text-2xl mt-8 mb-4 font-bold">
                         イベント一覧
-                        <Link
-                            isExternal
-                            href="#"
-                            color="foreground"
-                            className="ml-2"
-                        >
-                            イベント追加
-                            <Image
-                                src={Add}
-                                alt=""
-                                className="h-[16px] w-[16px] mb-[8px]"
-                            />
-                        </Link>
+                        <NewModal />
                     </h1>
 
                     <Table
@@ -427,131 +402,5 @@ export default async function StaffPageTop() {
 
             <Footer />
         </NextUIProvider>
-    );
-}
-
-function DeleteModal() {
-    const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
-    return (
-        <>
-            <Link isExternal onClick={onOpen} color="danger">
-                削除
-                <Image
-                    src={Trash}
-                    alt=""
-                    className="h-[16px] w-[16px] mb-[8px]"
-                />
-            </Link>
-
-            <Modal
-                isOpen={isOpen}
-                onOpenChange={onOpenChange}
-                isDismissable={false}
-            >
-                <ModalContent>
-                    {(onClose) => (
-                        <>
-                            <ModalHeader className="flex flex-col gap-1">
-                                イベント削除
-                            </ModalHeader>
-                            <ModalBody>
-                                「SUPER BEAVER 都会のラクダ TOUR 2023-2024 〜
-                                駱駝革命21 〜」を削除しますか？
-                            </ModalBody>
-                            <ModalFooter>
-                                <Button color="danger">削除する</Button>
-                            </ModalFooter>
-                        </>
-                    )}
-                </ModalContent>
-            </Modal>
-        </>
-    );
-}
-
-function EditModal() {
-    const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
-    const [selectedKeys, setSelectedKeys] = React.useState(new Set(["text"]));
-
-    const selectedValue = React.useMemo(
-        () => Array.from(selectedKeys).join(", ").replaceAll("_", " "),
-        [selectedKeys]
-    );
-
-    return (
-        <>
-            <Link isExternal onClick={onOpen} color="foreground">
-                編集
-                <Image
-                    src={Edit}
-                    alt=""
-                    className="h-[16px] w-[16px] mb-[8px]"
-                />
-            </Link>
-
-            <Modal
-                isOpen={isOpen}
-                onOpenChange={onOpenChange}
-                placement="top-center"
-            >
-                <ModalContent>
-                    {(onClose) => (
-                        <>
-                            <form action="">
-                                <ModalHeader className="flex flex-col gap-1">
-                                    イベント編集
-                                </ModalHeader>
-                                <ModalBody>
-                                    <Input
-                                        label="イベント名"
-                                        variant="bordered"
-                                        placeholder=" "
-                                    />
-                                    <Input
-                                        label="開催日"
-                                        variant="bordered"
-                                        type="date"
-                                        placeholder=" "
-                                    />
-                                    <Input
-                                        label="場所"
-                                        variant="bordered"
-                                        placeholder=" "
-                                    />
-                                    <div className="mj-select">
-                                        <label htmlFor="">
-                                            イベントカテゴリ
-                                        </label>
-                                        <select name="" id="">
-                                            <option value="">音楽ライブ</option>
-                                            <option value="">公開収録</option>
-                                        </select>
-                                    </div>
-                                    <div className="mj-select">
-                                        <label htmlFor="">
-                                            出演者
-                                        </label>
-                                        <select name="" id="">
-                                            <option value="">SUPER BEAVER</option>
-                                            <option value="">the peggies</option>
-                                        </select>
-                                    </div>
-                                    <Textarea
-                                        label="備考"
-                                        labelPlacement="inside"
-                                        placeholder=" "
-                                        defaultValue=""
-                                        variant="bordered"
-                                    />
-                                    <Button className="bg-mj_accent text-white">送信</Button>
-                                </ModalBody>
-                            </form>
-                        </>
-                    )}
-                </ModalContent>
-            </Modal>
-        </>
     );
 }
