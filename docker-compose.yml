@@ -43,7 +43,7 @@ services:
       MYSQL_DATABASE: sample
       MYSQL_PASSWORD: password
     ports:
-      - "3306:3306"
+      - "3307:3307"
     volumes:
       - ./db/conf:/etc/mysql/conf.d 
       - ./db/initdb:/docker-entrypoint-initdb.d
