@@ -32,7 +32,7 @@ export function DeleteModal() {
                 <Image
                     src={Trash}
                     alt=""
-                    className="h-[16px] w-[16px] mb-[8px]"
+                    className="h-[16px] w-[16px]"
                 />
             </Link>
 
@@ -72,7 +72,7 @@ export function EditModal() {
                 <Image
                     src={Edit}
                     alt=""
-                    className="h-[16px] w-[16px] mb-[8px]"
+                    className="h-[16px] w-[16px]"
                 />
             </Link>
 
@@ -151,7 +151,7 @@ export function NewModal() {
                 <Image
                     src={Edit}
                     alt=""
-                    className="h-[16px] w-[16px] mb-[8px]"
+                    className="h-[16px] w-[16px]"
                 />
             </Link>
 

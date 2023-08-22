@@ -1,13 +1,9 @@
 import './globals.css'
-import { Inter, Noto_Sans_Javanese } from 'next/font/google'
+import { Inter, Noto_Sans_JP } from 'next/font/google'
 
-const noto_Sans_Javanese = Noto_Sans_Javanese({
+const noto_Sans_JP = Noto_Sans_JP({
   subsets: ['latin'],
   weight: ["400", "500", "600", "700"],
-})
-
-const inter = Inter({ 
-  subsets: ['latin'] 
 })
 
 export const metadata = {
@@ -23,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="JP">
-      <body className={noto_Sans_Javanese.className}>{children}</body>
+      <body className={noto_Sans_JP.className}>{children}</body>
     </html>
   )
 }

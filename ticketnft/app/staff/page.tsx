@@ -80,7 +80,7 @@ export default async function StaffPageTop() {
                                         <Image
                                             src={Vuesax}
                                             alt=""
-                                            className="h-[16px] w-[16px] mb-[8px]"
+                                            className="h-[16px] w-[16px]"
                                         />
                                     </Link>
                                     <EditModal />
@@ -116,7 +116,7 @@ export default async function StaffPageTop() {
                                         <Image
                                             src={Vuesax}
                                             alt=""
-                                            className="h-[16px] w-[16px] mb-[8px]"
+                                            className="h-[16px] w-[16px]"
                                         />
                                     </Link>
                                     <Link
@@ -128,7 +128,7 @@ export default async function StaffPageTop() {
                                         <Image
                                             src={Edit}
                                             alt=""
-                                            className="h-[16px] w-[16px] mb-[8px]"
+                                            className="h-[16px] w-[16px]"
                                         />
                                     </Link>
                                     <Link isExternal href="#" color="danger">
@@ -136,7 +136,7 @@ export default async function StaffPageTop() {
                                         <Image
                                             src={Trash}
                                             alt=""
-                                            className="h-[16px] w-[16px] mb-[8px]"
+                                            className="h-[16px] w-[16px]"
                                         />
                                     </Link>
                                 </TableCell>
@@ -158,7 +158,7 @@ export default async function StaffPageTop() {
                             <Image
                                 src={Add}
                                 alt=""
-                                className="h-[16px] w-[16px] mb-[8px]"
+                                className="h-[16px] w-[16px]"
                             />
                         </Link>
                     </h1>
@@ -198,7 +198,7 @@ export default async function StaffPageTop() {
                                         <Image
                                             src={Vuesax}
                                             alt=""
-                                            className="h-[16px] w-[16px] mb-[8px]"
+                                            className="h-[16px] w-[16px]"
                                         />
                                     </Link>
                                     <Link
@@ -210,7 +210,7 @@ export default async function StaffPageTop() {
                                         <Image
                                             src={Edit}
                                             alt=""
-                                            className="h-[16px] w-[16px] mb-[8px]"
+                                            className="h-[16px] w-[16px]"
                                         />
                                     </Link>
                                     <Link isExternal href="#" color="danger">
@@ -218,7 +218,7 @@ export default async function StaffPageTop() {
                                         <Image
                                             src={Trash}
                                             alt=""
-                                            className="h-[16px] w-[16px] mb-[8px]"
+                                            className="h-[16px] w-[16px]"
                                         />
                                     </Link>
                                 </TableCell>
@@ -240,7 +240,7 @@ export default async function StaffPageTop() {
                             <Image
                                 src={Add}
                                 alt=""
-                                className="h-[16px] w-[16px] mb-[8px]"
+                                className="h-[16px] w-[16px]"
                             />
                         </Link>
                     </h1>
@@ -275,7 +275,7 @@ export default async function StaffPageTop() {
                                         <Image
                                             src={Edit}
                                             alt=""
-                                            className="h-[16px] w-[16px] mb-[8px]"
+                                            className="h-[16px] w-[16px]"
                                         />
                                     </Link>
                                     <Link isExternal href="#" color="danger">
@@ -283,7 +283,7 @@ export default async function StaffPageTop() {
                                         <Image
                                             src={Trash}
                                             alt=""
-                                            className="h-[16px] w-[16px] mb-[8px]"
+                                            className="h-[16px] w-[16px]"
                                         />
                                     </Link>
                                 </TableCell>
@@ -305,7 +305,7 @@ export default async function StaffPageTop() {
                             <Image
                                 src={Add}
                                 alt=""
-                                className="h-[16px] w-[16px] mb-[8px]"
+                                className="h-[16px] w-[16px]"
                             />
                         </Link>
                     </h1>
@@ -346,7 +346,7 @@ export default async function StaffPageTop() {
                                         <Image
                                             src={Edit}
                                             alt=""
-                                            className="h-[16px] w-[16px] mb-[8px]"
+                                            className="h-[16px] w-[16px]"
                                         />
                                     </Link>
                                     <Link isExternal href="#" color="danger">
@@ -354,7 +354,7 @@ export default async function StaffPageTop() {
                                         <Image
                                             src={Trash}
                                             alt=""
-                                            className="h-[16px] w-[16px] mb-[8px]"
+                                            className="h-[16px] w-[16px]"
                                         />
                                     </Link>
                                 </TableCell>
@@ -382,7 +382,7 @@ export default async function StaffPageTop() {
                                         <Image
                                             src={Edit}
                                             alt=""
-                                            className="h-[16px] w-[16px] mb-[8px]"
+                                            className="h-[16px] w-[16px]"
                                         />
                                     </Link>
                                     <Link isExternal href="#" color="danger">
@@ -390,7 +390,7 @@ export default async function StaffPageTop() {
                                         <Image
                                             src={Trash}
                                             alt=""
-                                            className="h-[16px] w-[16px] mb-[8px]"
+                                            className="h-[16px] w-[16px]"
                                         />
                                     </Link>
                                 </TableCell>
