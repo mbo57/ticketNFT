@@ -1,4 +1,4 @@
-package staff
+package cast
 
 import (
     "fmt"
@@ -11,15 +11,13 @@ import (
 )
 
 
-type Staff struct{
+type Cast struct{
     Id       int    `json:"id"`
-    Email    string `json:"email"`
-    Password string `json:"password"`
-    Name     string `json:"name"`
+    Cast     string `json:"cast"`
 }
-var columns = []string{"id", "email", "password", "name"}
+var columns = []string{"id", "cast"}
 
-type Staffs []Staff
+type Casts []Cast
 
 type Response struct {
     Code    int    `json:"code"`
@@ -56,7 +54,7 @@ func Entry(w http.ResponseWriter, r *http.Request) {
     // その他                                         -> NotFound
 
     // 正規表現コンパイル
-    re, err := regexp.Compile(`/staff/(?P<tmp>\D*)(?P<id>[0-9]*)$`)
+    re, err := regexp.Compile(`/cast/(?P<tmp>\D*)(?P<id>[0-9]*)$`)
     if err != nil {
         ResponseWriter(w, r, 424, err.Error())
         return
@@ -107,8 +105,8 @@ func Entry(w http.ResponseWriter, r *http.Request) {
 }
 
 func ReadAll(w http.ResponseWriter, r *http.Request) {
-	var staffs Staffs
-    query := "select * from staff"
+	var casts Casts
+    query := "select * from cast"
     
     // パラメータをもとにクエリ文を作成
     length := len(r.Form)
@@ -142,18 +140,16 @@ func ReadAll(w http.ResponseWriter, r *http.Request) {
         return
 	}
 
-    // クエリレスポンスからデータを抽出しstaffsにまとめる
+    // クエリレスポンスからデータを抽出しcastsにまとめる
 	for rows.Next() {
-        staff := Staff{}
-        err = rows.Scan(&staff.Id,
-                        &staff.Email,
-                        &staff.Password,
-                        &staff.Name)
+        cast := Cast{}
+        err = rows.Scan(&cast.Id,
+                        &cast.Cast)
 		if err != nil {
             ResponseWriter(w, r, 423,  err.Error())
             return
 		}
-		staffs = append(staffs, staff)
+		casts = append(casts, cast)
 	}
 
     // クエリレスポンスを閉じる
@@ -162,14 +158,14 @@ func ReadAll(w http.ResponseWriter, r *http.Request) {
     // httpレスポンスを設定する
     w.Header().Set("Content-Type", "application/json")
     w.WriteHeader(200)
-	json.NewEncoder(w).Encode(staffs)
+	json.NewEncoder(w).Encode(casts)
 }
 
 // idからレコードを検索する
 func Read(w http.ResponseWriter, r *http.Request, id string) {
-	var staffs Staffs
+	var casts Casts
     // クエリ文実行
-    rows, err := utility.Db.Query("select * from staff where id = ?", id)
+    rows, err := utility.Db.Query("select * from cast where id = ?", id)
 	if err != nil {
         ResponseWriter(w, r, 423, err.Error())
         return
@@ -177,16 +173,14 @@ func Read(w http.ResponseWriter, r *http.Request, id string) {
 
     // クエリレスポンスからデータの抽出
 	for rows.Next() {
-        staff := Staff{}
-        err = rows.Scan(&staff.Id,
-                        &staff.Email,
-                        &staff.Password,
-                        &staff.Name)
+        cast := Cast{}
+        err = rows.Scan(&cast.Id,
+                        &cast.Cast)
 		if err != nil {
             ResponseWriter(w, r, 423, err.Error())
             return
 		}
-		staffs = append(staffs, staff)
+		casts = append(casts, cast)
 	}
 
     // クエリレスポンスを閉じる
@@ -195,18 +189,16 @@ func Read(w http.ResponseWriter, r *http.Request, id string) {
     // httpレスポンスを設定する
     w.Header().Set("Content-Type", "application/json")
     w.WriteHeader(200)
-	json.NewEncoder(w).Encode(staffs)
+	json.NewEncoder(w).Encode(casts)
 }
 
 
 func Create(w http.ResponseWriter, r *http.Request) {
     // フォームの内容を取得
-    email := r.FormValue("email")
-    password := r.FormValue("password")
-    name := r.FormValue("name")
+    cast := r.FormValue("cast")
 
     // レコードを作るクエリを実行
-    result, err := utility.Db.Exec("INSERT INTO staff(email, password, name) VALUES(?, ?, ?)", email, password, name)
+    result, err := utility.Db.Exec("INSERT INTO cast(cast) VALUES(?)", cast)
     
     if err != nil {
         ResponseWriter(w, r, 423,  err.Error())
@@ -227,7 +219,7 @@ func Create(w http.ResponseWriter, r *http.Request) {
 
 // id で既ににあるレコードを編集
 func Update(w http.ResponseWriter, r *http.Request, id string) {
-    query := "update staff set"
+    query := "update cast set"
     
     // クエリを作成
     length := len(r.Form)
@@ -280,7 +272,7 @@ func Update(w http.ResponseWriter, r *http.Request, id string) {
 // id でレコードを消去する
 func Delete(w http.ResponseWriter, r *http.Request, id string) {
     // クエリを実行
-    result, err := utility.Db.Exec("delete from staff where id = ?", id)
+    result, err := utility.Db.Exec("delete from cast where id = ?", id)
     if err != nil {
         ResponseWriter(w, r, 423, err.Error())
         return
