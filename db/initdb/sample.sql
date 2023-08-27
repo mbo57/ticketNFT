@@ -23,22 +23,22 @@ INSERT INTO staff (email, password, name) VALUES ("abc@abc", "123", "abc");
 CREATE TABLE cast
 (
     id   INT          NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    cast VARCHAR(100)
+    name VARCHAR(100)
 );
 
-INSERT INTO cast (cast) VALUES ("木村花子");
-INSERT INTO cast (cast) VALUES ("佐藤太郎");
-INSERT INTO cast (cast) VALUES ("鈴木次郎");
+INSERT INTO cast (name) VALUES ("木村花子");
+INSERT INTO cast (name) VALUES ("佐藤太郎");
+INSERT INTO cast (name) VALUES ("鈴木次郎");
 
 
 CREATE TABLE eventcategory
 (
-    id       INT          NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    category VARCHAR(100)
+    id   INT          NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100)
 );
 
-INSERT INTO eventcategory (category) VALUES ("スポーツ");
-INSERT INTO eventcategory (category) VALUES ("音楽ライブ");
+INSERT INTO eventcategory (name) VALUES ("スポーツ");
+INSERT INTO eventcategory (name) VALUES ("音楽ライブ");
 
 
 CREATE TABLE event
@@ -47,7 +47,7 @@ CREATE TABLE event
     name            VARCHAR(100),
     img             VARCHAR(100),
     date            DATE,
-    veune           VARCHAR(100),
+    venue           VARCHAR(100),
     castid          INT           REFERENCES cast (id),
     eventcategoryid INT           REFERENCES eventcategory (id),
     description     VARCHAR(500)
@@ -58,7 +58,7 @@ INSERT INTO event
     name,
     img,
     date,
-    veune,
+    venue,
     castid,
     eventcategoryid,
     description
