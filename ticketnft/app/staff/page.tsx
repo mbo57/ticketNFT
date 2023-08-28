@@ -5,7 +5,11 @@ import { useState } from "react";
 import Image from "next/image";
 
 import { HeaderForStaff } from "@/app/components/staff/header";
-import { DeleteModal, EditModal, NewModal } from "@/app/components/staff/modal";
+import {
+    DeleteModal,
+    EditModal,
+    NewModal,
+} from "@/app/components/staff/eventModal";
 import { Footer } from "@/app/components/footer";
 
 import {
@@ -27,29 +31,57 @@ import Trash from "../../public/icon/trash.png";
 
 import {
     Event,
-    Events,
     SampleDataEvent,
-    SampleDataEvents,
     EventCategory,
-    EventCategories,
     SampleDataEventCategory,
     Cast,
-    Casts,
     SampleDataCast,
-} from "@/app/staff/type"
+} from "@/app/staff/type";
 
 export default function StaffPageTop() {
-    let [events, setevents] = useState<Events>({
-        name: "イベント",
-        data: [SampleDataEvent]
-    })
+    let [events, setevents] = useState<Event[]>([
+        SampleDataEvent,
+        SampleDataEvent,
+    ]);
 
-    const [name, setName] = useState<string>("")
-    const [date, setDate] = useState<string>("")
-    const [place, setPlace] = useState<string>("")
-    const [cast, setCast] = useState<Cast>({id: 0, name: ""})
+    const eventsElement = (): JSX.Element[] => {
+        return events.map((item) => (
+            <TableRow key="1">
+                <TableCell>
+                    <Avatar radius="md" src={item.img} />
+                </TableCell>
+                <TableCell className="font-bold">{item.name}</TableCell>
+                <TableCell>{String(item.date)}</TableCell>
+                <TableCell>{item.venue}</TableCell>
+                <TableCell>{item.cast.name}</TableCell>
+                <TableCell>{item.eventCategory.name}</TableCell>
+                <TableCell>{item.description}</TableCell>
+                <TableCell>
+                    <Link isExternal href="#" color="foreground">
+                        詳細
+                        <Image
+                            src={Vuesax}
+                            alt=""
+                            className="h-[16px] w-[16px]"
+                        />
+                    </Link>
+                    <EditModal />
+                    <DeleteModal />
+                </TableCell>
+            </TableRow>
+        ));
+    };
 
-    
+    const [id, setId] = useState<number>(0);
+    const [name, setName] = useState<string>("");
+    const [date, setDate] = useState<string>("");
+    const [place, setPlace] = useState<string>("");
+    const [cast, setCast] = useState<Cast>({ id: 0, name: "" });
+    const [eventCategory, setEventCategory] = useState<Cast>({
+        id: 0,
+        name: "",
+    });
+    const [description, setDescription] = useState<string>("");
 
     return (
         <NextUIProvider>
@@ -58,7 +90,7 @@ export default function StaffPageTop() {
             <main className="mj-container">
                 <section>
                     <h1 className="text-2xl mt-8 mb-4 font-bold">
-                        {events.name}一覧
+                        イベント一覧
                         <NewModal />
                     </h1>
 
@@ -77,6 +109,7 @@ export default function StaffPageTop() {
                             <TableColumn className=""> </TableColumn>
                         </TableHeader>
                         <TableBody>
+                            {eventsElement()}
                             <TableRow key="1">
                                 <TableCell>
                                     <Avatar
@@ -111,60 +144,6 @@ export default function StaffPageTop() {
                                     </Link>
                                     <EditModal />
                                     <DeleteModal />
-                                </TableCell>
-                            </TableRow>
-                            <TableRow key="2">
-                                <TableCell>
-                                    <Avatar
-                                        radius="md"
-                                        src="https://material.onlineticket.jp/s/image/025431/0001/000/0254310001_3.jpg"
-                                    />
-                                </TableCell>
-                                <TableCell className="font-bold">
-                                    SUPER BEAVER 都会のラクダ TOUR 2023-2024 〜
-                                    駱駝革命21 〜
-                                </TableCell>
-                                <TableCell>2023/09/29</TableCell>
-                                <TableCell>広島文化学園HBGホール</TableCell>
-                                <TableCell>SUPER BEAVER</TableCell>
-                                <TableCell>音楽ライブ</TableCell>
-                                <TableCell>
-                                    SUPER BEAVERのライブ。SUPER
-                                    BEAVERの個人的に一番好きな曲は、証明です。
-                                </TableCell>
-                                <TableCell>
-                                    <Link
-                                        isExternal
-                                        href="#"
-                                        color="foreground"
-                                    >
-                                        詳細
-                                        <Image
-                                            src={Vuesax}
-                                            alt=""
-                                            className="h-[16px] w-[16px]"
-                                        />
-                                    </Link>
-                                    <Link
-                                        isExternal
-                                        href="#"
-                                        color="foreground"
-                                    >
-                                        編集
-                                        <Image
-                                            src={Edit}
-                                            alt=""
-                                            className="h-[16px] w-[16px]"
-                                        />
-                                    </Link>
-                                    <Link isExternal href="#" color="danger">
-                                        削除
-                                        <Image
-                                            src={Trash}
-                                            alt=""
-                                            className="h-[16px] w-[16px]"
-                                        />
-                                    </Link>
                                 </TableCell>
                             </TableRow>
                         </TableBody>

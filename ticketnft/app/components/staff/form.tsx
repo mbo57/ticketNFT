@@ -141,8 +141,14 @@ export function EditModal() {
     );
 }
 
-export function NewModal() {
+type NewModalProps = {
+    forms: Object,
+}
+
+export function NewModal(Props: NewModalProps) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+    console.log(Props.forms);
 
     return (
         <>
@@ -165,7 +171,7 @@ export function NewModal() {
                         <>
                             <form action="">
                                 <ModalHeader className="flex flex-col gap-1">
-                                    イベント編集
+                                    イベント新規作成
                                 </ModalHeader>
                                 <ModalBody>
                                     <Input

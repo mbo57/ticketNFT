@@ -1,8 +1,8 @@
 // イベント
-export type Events = {
+/*export type Events = {
     name: "イベント",
     data: Event[]
-}
+}*/
 
 export type Event = {
     id: number,
@@ -16,10 +16,10 @@ export type Event = {
 }
 
 // イベントカテゴリ
-export type EventCategories = {
+/*export type EventCategories = {
     name: "イベントカテゴリ",
     data: EventCategory[]
-}
+}*/
 
 export type EventCategory = {
     id: number,
@@ -27,10 +27,10 @@ export type EventCategory = {
 }
 
 // 出演者
-export type Casts = {
+/*export type Casts = {
     name: "出演者",
     data: Cast[]
-}
+}*/
 
 export type Cast = {
     id: number,
@@ -62,7 +62,7 @@ export let SampleDataEvent: Event = {
 
 
 
-export let SampleDataEvents = {
+/*export let SampleDataEvents = {
     name: "イベント",
     data: [SampleDataEvent, SampleDataEvent]
-}
+}*/
