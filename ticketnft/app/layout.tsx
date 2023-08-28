@@ -1,7 +1,10 @@
 import './globals.css'
-import { Inter } from 'next/font/google'
+import { Inter, Noto_Sans_JP } from 'next/font/google'
 
-const inter = Inter({ subsets: ['latin'] })
+const noto_Sans_JP = Noto_Sans_JP({
+  subsets: ['latin'],
+  weight: ["400", "500", "600", "700"],
+})
 
 export const metadata = {
   title: 'Ticket NFT App',
@@ -16,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="JP">
-      <body className={inter.className}>{children}</body>
+      <body className={noto_Sans_JP.className}>{children}</body>
     </html>
   )
 }
