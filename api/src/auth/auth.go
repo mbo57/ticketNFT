@@ -40,16 +40,16 @@ func ValidateUser(user *typefile.User) error {
 	}
 
 	// Password バリデーション　正規表現
-	// validLen := len(user.Password) >= 8
-	// hasUpper := checkReg(`[A-Z]`, user.Password)
-	// hasLower := checkReg(`[a-z]`, user.Password)
-	// hasPunc := checkReg(`[\p{P}\p{S}]`, user.Password)
+	validLen := len(user.Password) >= 8
+	hasUpper := checkReg(`[A-Z]`, user.Password)
+	hasLower := checkReg(`[a-z]`, user.Password)
+	hasPunc := checkReg(`[\p{P}\p{S}]`, user.Password)
 
-	// passwordCheck := validLen && hasLower && hasUpper && hasPunc
+	passwordCheck := validLen && hasLower && hasUpper && hasPunc
 
-	// if !passwordCheck {
-	// 	return errors.New("PassWord Format Error")
-	// }
+	if !passwordCheck {
+		return errors.New("PassWord Format Error")
+	}
 
 	return nil
 }

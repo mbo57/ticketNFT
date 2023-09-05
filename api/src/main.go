@@ -1,19 +1,22 @@
 package main
 
 import (
-	"app/router"
+	"app/crud"
+	"log"
+	"net/http"
 )
 
 func main() {
 
-	// http.HandleFunc("/staff/", crud.Entry)
-	// http.HandleFunc("/event/", crud.Entry)
-	// http.HandleFunc("/eventcategory/", crud.Entry)
-	// http.HandleFunc("/cast/", crud.Entry)
+	http.HandleFunc("/staff/", crud.Entry)
+	http.HandleFunc("/event/", crud.Entry)
+	http.HandleFunc("/eventcategory/", crud.Entry)
+	http.HandleFunc("/cast/", crud.Entry)
 
-	e := router.Init()
+	log.Fatal(http.ListenAndServe(":8000", nil))
 
-	e.Logger.Fatal(e.Start(":8000"))
+	// ↓　共存むりかも　JWT
+	// e := router.Init()
+	// e.Logger.Fatal(e.Start(":8000"))
 
-	// log.Fatal(http.ListenAndServe(":8000", nil))
 }
