@@ -5,7 +5,7 @@ const apiUrl = "http://api:8000/";
 
 //  SSRでStaff一覧を取得する
 async function getStaffs() {
-    const url = apiUrl + "staff/show"
+    const url = apiUrl + "staff/"
     const res = await fetch(url, {cache: 'no-store'})
 
     if(!res.ok){
