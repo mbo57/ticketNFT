@@ -8,12 +8,14 @@ import (
 	"fmt"
 	"net/http"
 	"regexp"
+	"strings"
 
 	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
 	"golang.org/x/crypto/bcrypt"
 )
 
+// 指定のEmailアドレスが登録されているか確認するための関数
 func isUserRegisteredByEmail(email string) bool {
 	var uid string
 	query := `SELECT id FROM users WHERE email = ?;`
@@ -24,6 +26,7 @@ func isUserRegisteredByEmail(email string) bool {
 	return true
 }
 
+// ユーザー EmailとPasswordのバリデーション
 func ValidateUser(user *typefile.User) error {
 	var reg string
 
@@ -54,12 +57,14 @@ func ValidateUser(user *typefile.User) error {
 	return nil
 }
 
+// 正規表現マッチング確認
 func checkReg(reg string, str string) bool {
 	r := regexp.MustCompile(reg)
 	match := r.Match([]byte(str))
 	return match
 }
 
+// Emailを指定して引数をとして渡した構造体userにデータをマッピングする関数
 func getUserByEmail(user *typefile.User, email string) error {
 	query := `SELECT * FROM users WHERE email = ?;`
 	err := utility.Db.QueryRow(query, email).Scan(&user.Id, &user.Name, &user.Email, &user.Password)
@@ -69,6 +74,17 @@ func getUserByEmail(user *typefile.User, email string) error {
 	return nil
 }
 
+// IDを指定して引数をとして渡した構造体userにデータをマッピングする関数
+func getUserById(user *typefile.User, id string) error {
+	query := `SELECT * FROM users WHERE id = ?;`
+	err := utility.Db.QueryRow(query, id).Scan(&user.Id, &user.Name, &user.Email, &user.Password)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// ユーザー登録処理　必須項目：name email password
 func Register(c echo.Context) error {
 	user := typefile.User{}
 	user.Id = uuid.New().String()
@@ -115,6 +131,7 @@ func Register(c echo.Context) error {
 
 }
 
+// ログイン処理　emailとpassword指定でJWTtokenを返す
 func Login(c echo.Context) error {
 
 	user := typefile.User{}
@@ -151,7 +168,80 @@ func Login(c echo.Context) error {
 	return c.JSON(http.StatusOK, echo.Map{
 		"accToken": accToken,
 	})
+}
 
+// ユーザー情報更新処理
+// TODO:EmailとPasswordのバリデーションを追加する
+// TODO: Passwordが変更されている時はハッシュ化して保存する
+func Update(c echo.Context) error {
+	claims := GetClaims(c)
+	id := claims.ID
+	newUser := typefile.User{}
+	if err := c.Bind(&newUser); err != nil {
+		return c.JSON(http.StatusBadRequest, echo.Map{
+			"error": err.Error(),
+		})
+	}
+
+	userMap := newUser.CreateUserMap()
+	query := `UPDATE users SET`
+	var nList []string
+	var vList []any
+	for fieldName, value := range userMap {
+		if value != "" {
+			nList = append(nList, fieldName)
+			vList = append(vList, value)
+		}
+	}
+	vList = append(vList, id)
+
+	t := strings.Join(nList, "=?, ") + "=?"
+	query += " " + t + " WHERE id = ?;"
+	_, err := utility.Db.Exec(query, vList...)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, echo.Map{
+			"error": err.Error(),
+		})
+	}
+
+	updateUser := typefile.User{}
+	getUserById(&updateUser, id)
+
+	return c.JSON(http.StatusOK, updateUser)
+
+}
+
+func Delete(c echo.Context) error {
+	query := `DELETE FROM users WHERE id = ?;`
+	claims := GetClaims(c)
+	id := claims.ID
+	res, err := utility.Db.Exec(query, id)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, echo.Map{
+			"error": err.Error(),
+		})
+	}
+
+	deleteNum, err := res.RowsAffected()
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, echo.Map{
+			"error": err.Error(),
+		})
+	}
+
+	if deleteNum == 0 {
+		return c.JSON(http.StatusBadRequest, echo.Map{
+			"error": "delete failed",
+		})
+	} else if deleteNum == 1 {
+		return c.JSON(http.StatusOK, echo.Map{
+			"message": "delete success",
+		})
+	}
+
+	return c.JSON(http.StatusBadRequest, echo.Map{
+		"error": "delete failed",
+	})
 }
 
 func GetAuthUser(c echo.Context) error {
@@ -159,7 +249,7 @@ func GetAuthUser(c echo.Context) error {
 	id := claims.ID
 	user := typefile.User{}
 	user.Password = "********"
-	query := `select id, name, email from users where id = ?;`
+	query := `SELECT id, name, email FROM users WHERE id = ?;`
 	err := utility.Db.QueryRow(query, id).Scan(&user.Id, &user.Name, &user.Email)
 
 	if err == sql.ErrNoRows {

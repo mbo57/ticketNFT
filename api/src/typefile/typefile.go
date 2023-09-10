@@ -57,3 +57,11 @@ type User struct {
 	Email    string `json:"email" form:"email"`
 	Password string `json:"password" form:"password"`
 }
+
+func (u User) CreateUserMap() map[string]string {
+	userMap := make(map[string]string)
+	userMap["Name"] = u.Name
+	userMap["Email"] = u.Email
+	userMap["Password"] = u.Password
+	return userMap
+}
